@@ -83,12 +83,23 @@ const hidedialog=()=>{
 }
 // ====================================
 const fileInputRef = useRef(null);
+const fileInputRef1 = useRef(null);
+const fileInputRef2 = useRef(null);
+
   const [fileName, setFileName] = useState("");
+    const [fileName1, setFileName1] = useState("");
+  const [fileName2, setFileName2] = useState("");
+
   const [fileURL,setfileURL]=useState(null);
   // 🔹 When button clicked, open the hidden file input
   const handleButtonClick = () => {
-    fileInputRef.current.click();
-    
+    fileInputRef.current.click();  
+  };
+  const handleButtonClick1 = () => {
+    fileInputRef1.current.click();  
+  };
+  const handleButtonClick2 = () => {
+    fileInputRef2.current.click();  
   };
 
   // // 🔹 When user selects a file
@@ -96,6 +107,32 @@ const fileInputRef = useRef(null);
     const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
+      // const tempURL = URL.createObjectURL(file);
+      setfileURL(file)
+      console.log(file)
+      console.log(fileURL)
+    }
+    // const file = fileInputRef.current.files[0];
+    if (!file) return alert("Select a PDF");
+    // setfileURL(file)
+  };
+  const handleFileChange1 = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFileName1(file.name);
+      // const tempURL = URL.createObjectURL(file);
+      setfileURL(file)
+      console.log(file)
+      console.log(fileURL)
+    }
+    // const file = fileInputRef.current.files[0];
+    if (!file) return alert("Select a PDF");
+    // setfileURL(file)
+  };
+  const handleFileChange2 = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFileName2(file.name);
       // const tempURL = URL.createObjectURL(file);
       setfileURL(file)
       console.log(file)
@@ -259,20 +296,25 @@ Nous vous répondrons dans les plus brefs délais.</p></div></>}
         </select>
         </div>
         <h4>Veuillez joindre les documents suivants</h4>
+        <div>
          <div className="reda">
         <label className='option'>Carte grise :</label>
-        <button type="button" onClick={handleButtonClick}  id="atphone"><img src={impor}/>ajouter</button>
+        <button type="button" onClick={handleButtonClick}  id="atphone"><img src={impor}/>{fileName===""?"Ajouter":"Modifier"}</button>
         <input onChange={handleFileChange} ref={fileInputRef} accept="application/pdf" style={{ display: "none" }}  type="file" name="dateEmprunt" />
         </div>
+        {fileName && <p>{fileName}</p>}
         <div className="reda">
         <label className='option'>Permis de conduire :</label>
-        <button type="button" onClick={handleButtonClick} id="atphone"><img src={impor}/>ajouter</button>
-        <input onChange={handleFileChange} accept="application/pdf" style={{ display: "none" }}  type="file" name="dateEmprunt" />
+        <button type="button" onClick={handleButtonClick1} id="atphone"><img src={impor}/>{fileName1===""?"Ajouter":"Modifier"}</button>
+        <input onChange={handleFileChange1} ref={fileInputRef1} accept="application/pdf" style={{ display: "none" }}  type="file" name="dateEmprunt" />
         </div>
+        {fileName1 && <p>{fileName1}</p>}
         <div className="reda">
         <label className='option'>CIN :</label>
-        <button type="button" onClick={handleButtonClick} id="atphone"><img src={impor}/>ajouter</button>
-        <input onChange={handleFileChange} ref={fileInputRef} accept="application/pdf" style={{ display: "none" }}  type="file" name="dateEmprunt" />
+        <button type="button" onClick={handleButtonClick2} id="atphone"><img src={impor}/>{fileName2===""?"Ajouter":"Modifier"}</button>
+        <input onChange={handleFileChange2} ref={fileInputRef2} accept="application/pdf" style={{ display: "none" }}  type="file" name="dateEmprunt" />
+        </div>
+        {fileName2 && <p>{fileName2}</p>}
         </div>
         <div id="divat">
         <button type="button" onClick={btnprecedent} id="atphone" ><img style={{transform:"rotate(180deg)"}} src={arow} />précédent</button>
